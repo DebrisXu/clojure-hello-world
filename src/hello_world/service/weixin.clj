@@ -32,7 +32,8 @@
           (res/failResponse weixin-response))
         (res/succResponse weixin-response)))
     (catch Exception e
-      (do                                                   ;;(log/error "get access token error: " (.getMessage e))
+      (do
+        ;;(log/error "get access token error: " (.getMessage e))
           (res/failResponse 50100 (.getMessage e))))))
 
 (defn get-weixin-info
