@@ -5,6 +5,7 @@
     [cheshire.core :as cheshire]
     [ring.util.codec :as encoder]
     [hello-world.util.response :as res]
+    [clojure.tools.logging :as log]
     ))
 
 (def APP_ID "wx97efadfe16b09ba3")
@@ -25,16 +26,16 @@
                               :timeout TIMEOUT
                               :as :json})
           weixin-response (:body result)]
-      ;;(log/info "access token response: " weixin-response)
+      (log/info "access token response: " weixin-response)
       (if (:errcode weixin-response)
         (do
-          ;;(log/error "get access token failed: " (:errcode weixin-response))
+          (log/error "get access token failed: " (:errcode weixin-response))
           (res/failResponse weixin-response))
         (res/succResponse weixin-response)))
     (catch Exception e
       (do
-        ;;(log/error "get access token error: " (.getMessage e))
-          (res/failResponse 50100 (.getMessage e))))))
+        (log/error "get access token error: " (.getMessage e))
+        (res/failResponse 50100 (.getMessage e))))))
 
 (defn get-weixin-info
   [access_token openid]
@@ -46,14 +47,14 @@
                               :timeout TIMEOUT
                               :as :json})
           weixin-response (:body result)]
-      ;;(log/info "userinfo response: " weixin-response)
+      (log/info "userinfo response: " weixin-response)
       (if (:errcode weixin-response)
         (do
-          ;;(log/error "get open user info failed: " (:errcode weixin-response))
+          (log/error "get open user info failed: " (:errcode weixin-response))
           (res/failResponse weixin-response))
         (res/succResponse weixin-response)))
     (catch Exception e
-      ;;(log/error ("get open user info error: " (.getMessage e)))
+      (log/error ("get open user info error: " (.getMessage e)))
       )))
 
 (defn weixin-info

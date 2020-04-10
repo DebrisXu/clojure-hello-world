@@ -12,6 +12,8 @@
                  [cprop "0.1.16"]
                  [cheshire "5.10.0"]
                  [ring/ring-devel "1.7.1"]
+                 [org.clojure/tools.logging "1.0.0"]
+                 [org.apache.logging.log4j/log4j-slf4j-impl "2.12.1"]
                  ]
   :plugins [[lein-ring "0.12.5"]
             [lein-cloverage "1.1.1"]]
